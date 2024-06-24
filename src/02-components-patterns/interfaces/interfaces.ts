@@ -42,3 +42,15 @@ export interface ProductCardHOCProps {
     Image:    (Props: ProductImageProps )    => JSX.Element,
     Buttons:  ( Props: ProductButtonsProps ) => JSX.Element
 }
+
+
+export interface onChangeArgs {
+    product: Product;
+    count: number
+}
+
+// Interfaz para productos en el carrito con una cantidad añadida
+export interface ProductInCart extends Product {
+    count: number;
+  }
+  

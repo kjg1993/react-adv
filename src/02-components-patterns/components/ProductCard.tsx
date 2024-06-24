@@ -1,7 +1,7 @@
 import React, {  ReactElement, createContext } from 'react';
 import { useProduct } from '../hooks/useProduct'; // Importa el hook personalizado useProduct
 import styles from '../styles/styles.module.css'; // Importa los estilos CSS
-import { ProductContextProps, Product } from '../interfaces/interfaces';
+import { ProductContextProps, Product, onChangeArgs } from '../interfaces/interfaces';
 
 
 
@@ -15,14 +15,16 @@ export interface Props {
     product: Product;
     children?: ReactElement | ReactElement[];
     className?: string;
-    style?: React.CSSProperties
+    style?: React.CSSProperties;
+    onChange?: ( args: onChangeArgs ) => void;
+    value?: number;
 }
 
 
 
 // Componente principal que agrupa todos los subcomponentes anteriores
-export const ProductCard = ({ children, product, className , style}: Props) => {
-    const { counter, increaseBy } = useProduct(); // Utiliza el hook useProduct para obtener el contador y la función increaseBy
+export const ProductCard = ({ children, product, className , style, onChange, value}: Props) => {
+    const { counter, increaseBy } = useProduct( { onChange, product, value } ); // Utiliza el shook useProduct para obtener el contador y la función increaseBy
 
     return (
         <Provider value={{
