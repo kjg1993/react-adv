@@ -1,48 +1,92 @@
-import { Suspense } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import { Routes, Route, NavLink, Navigate } from 'react-router-dom'
-import logo from '../logo.svg'
-import { routes } from './routes'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink
+} from 'react-router-dom';
 
+import logo from '../logo.svg';
+
+import { RegisterPage, FormikBasicPage, FormikYupPage, FormikComponents, FormikAbstraction } from '../03-forms/pages'
 
 export const Navigation = () => {
   return (
-    <Suspense fallback={ <span>Loading...</span> }>
+    <Router>
+      <div className="main-layout">
+        <nav>
+          <img src={logo} alt="React Logo" />
+          <ul>
+            <li>
+              <NavLink
+                to="/register"
+                className={({ isActive }) => isActive ? "nav-active" : ""}
 
-      <BrowserRouter>
-        <div className="main-layout">
-          <nav><img src={logo} alt="React Logo" />
-            <ul>
+              >
+                Resgister Page
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/formik-basic"
+                className={({ isActive }) => isActive ? "nav-active" : ""}
 
-              {
-                routes.map(({ to, name }) => (
+              >
+                Formik Basic
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/formik-yup"
+                className={({ isActive }) => isActive ? "nav-active" : ""}
 
-                  <li key={to}>
-                    <NavLink to={to} className={({ isActive }) => isActive ? 'nav-active' : ''} >{name}</NavLink>
-                  </li>
-                ))
-              }
+              >
+                Formik Yup
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/formik-components"
+                className={({ isActive }) => isActive ? "nav-active" : ""}
 
-            </ul>
-          </nav>
+              >
+                Formik Components
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/formik-abstractation"
+                className={({ isActive }) => isActive ? "nav-active" : ""}
 
-          <Routes>
+              >
+                Formik Abstractation
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/users"
+                className={({ isActive }) => isActive ? "nav-active" : ""}
 
-            {
-              routes.map(({ to, Component }) => (
+              >
+                Users
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
 
-                <Route key={to} path={to} element={<Component />} />
-              ))
-            }
+        {/* A <Routes> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Routes>
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/formik-basic" element={<FormikBasicPage />} />
+          <Route path="/formik-yup" element={<FormikYupPage />} />
+          <Route path="/formik-components" element={<FormikComponents />} />
+          <Route path="/formik-abstractation" element={<FormikAbstraction />} />
 
-
-            <Route path="/*" element={<Navigate to={routes[0].to} replace />} />
-          </Routes>
-
-        </div>
-      </BrowserRouter>
-    </Suspense>
-  )
+          <Route path="/" element={<h1>Home</h1>} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default Navigation
+export default Navigation;

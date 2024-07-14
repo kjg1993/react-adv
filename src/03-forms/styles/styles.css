@@ -1,0 +1,32 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+input, input[type="checkbox"], select {
+    margin-top: 5px;
+    outline: none;
+    padding: 10px;
+}
+
+input[type="checkbox"] {
+    margin-top: 5px;
+    padding: 0;
+    width: auto;
+    align-self: flex-start;
+}
+
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+span, .error-message {
+    color: red;
+}
+
+.has-error {
+    border: 1px solid red;
+}
